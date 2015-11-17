@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+
+		<meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
+		<title>Creditos</title>
+		<link rel='stylesheet' type='text/css' href='estilos/style.css' />
+		<link rel='stylesheet' 
+			   type='text/css' 
+			   media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+			   href='estilos/wide-creditos.css' />
+		<link rel='stylesheet'  
+			   type='text/css' 
+			   media='only screen and (max-width: 480px)'
+			   href='estilos/smartphone.css' />
+			   
+			   <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js?ver=3.1.2'></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&sensor=true"></script>
+	<style type="text/css">
+		
+		
+		#mapa_content {
+			
+			margin:10px 100px 0px 500px;
+			height: 650px;
+			width:650px;
+		}
+	</style>
+	<script type="text/javascript"> 
+		if (navigator.geolocation) {
+			// Obtenemos la ubicacion
+		} else {
+			alert("Tu navegador no soporta la geolocalización, actualiza tu navegador.");
+		}
+		var mapa;
+		
+		var x = document.getElementById("demo");
+
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else { 
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
+
+		function showPosition(position) {
+			x.innerHTML = "Latitude: " + position.coords.latitude + 
+			"<br>Longitude: " + position.coords.longitude;	
+		}
+		
+		function inicializar() {
+			var opciones = {
+			  zoom: 6,
+			  mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			mapa = new google.maps.Map(document.getElementById('mapa_content'), opciones);
+			if (navigator.geolocation)
+			{
+			    //Hago el CallBack a mostrarLocalizacion
+				navigator.geolocation.getCurrentPosition(mostrarLocalizacion,manejadorDeError);
+			}
+			else{
+			    //Caso contraio muestro error
+				alert("Su navegador no soporta Geolocalizacion");
+				}
+		}
+
+	    function mostrarLocalizacion(posicion)
+	     {
+            var pos = new google.maps.LatLng(posicion.coords.latitude,posicion.coords.longitude);
+            //Muestro un tooltip con un mensaje sobre el mapa
+            var infowindow = new google.maps.InfoWindow({
+              map: mapa,
+              position: pos,
+              content: 'Usted se encuentra aqui.'
+            });
+
+            mapa.setCenter(pos);
+	      }
+
+	    function manejadorDeError(error) {
+
+		   switch(error.code)
+            {
+                case error.PERMISSION_DENIED: alert("El usuario no permite compartir datos de geolocalizacion");
+                break;
+
+                case error.POSITION_UNAVAILABLE: alert("Imposible detectar la posicio actual");
+                break;
+
+                case error.TIMEOUT: alert("La posicion debe recuperar el tiempo de espera");
+                break;
+
+                default: alert("Error desconocido");
+                break;
+            }
+			var opciones = {
+			  map: mapa,
+			  position: new google.maps.LatLng(60, 105),
+			  content: content
+			};
+			var infowindow = new google.maps.InfoWindow(opciones);
+			mapa.setCenter(opciones.position);
+      }
+      google.maps.event.addDomListener(window, 'load', inicializar);
+    </script>
+	</head>
+	<body onLoad="getLocation()">
+	<div id='page-wrap'>
+	<header class='main' id='h1'>
+		<h2>Creditos</h2>
+    </header>
+	
+    <section class="main" id="s1">
+		<label>Nombres: Alan Tugentman - Ramiro Visca</label><br><br>
+		<label>Especialidad: Ing. Informatica</label><br><br>
+		<label>Otros: Intercambio - Erasmus - Uruguay</label><br><br>
+		<img src="bandera.png" alt="Bandera Uruguaya" height="42" width="42"/><br><br>
+		
+
+		<p id="demo"></p>
+
+
+		<span> <div id="mapa_content"></div></span>
+		<span><a href='layout.html'>Volver</a></span>
+	</section>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>Formulario de consulta de usuarios</title>
+	<SCRIPT LANGUAGE="JavaScript">
+	var XMLHttpRequestObject = false;  
+	XMLHttpRequestObject = new XMLHttpRequest();
+
+
+	function pedirDatos()
+	{
+		var mail = document.getElementById('email').value;
+		if(XMLHttpRequestObject)
+		{   
+			
+			XMLHttpRequestObject.onreadystatechange = function()
+			{
+			
+				if (XMLHttpRequestObject.readyState==4)
+	      		{
+	      			var cont = 0;		
+	      		
+	      			var respuesta=XMLHttpRequestObject.responseXML;
+					while(respuesta.getElementsByTagName('email')[cont].childNodes[0].nodeValue != mail)
+					{
+						cont = cont +1;
+						if(cont >= respuesta.getElementsByTagName('email').length)
+						{
+							alert("No encontrado");
+						}
+					}
+
+					var obj1 = document.getElementById('nombre');
+					obj1.innerHTML= respuesta.getElementsByTagName('nombre')[cont].childNodes[0].nodeValue;
+					var obj2 = document.getElementById('apellido1');
+					obj2.innerHTML= respuesta.getElementsByTagName('apellido1')[cont].childNodes[0].nodeValue;
+					var obj3 = document.getElementById('apellido2');
+					obj3.innerHTML= respuesta.getElementsByTagName('apellido2')[cont].childNodes[0].nodeValue;
+					var obj4 = document.getElementById('telefono');
+					obj4.innerHTML= respuesta.getElementsByTagName('telefono')[cont].childNodes[0].nodeValue;
+					
+				}
+			}
+		  XMLHttpRequestObject.open("GET","XML/usuarios.xml"); 
+		  XMLHttpRequestObject.send(null);
+		} 
+	} 
+	</SCRIPT>
+</head>
+<body>
+ 
+<h3>Formulario de consulta de usuarios</h3>
+ 
+<form>
+  Email:
+  <input type="text" id="email" name="email"/>
+  <input type="button" value="Enviar" onclick = "pedirDatos()" />
+</form>
+
+  <br>
+  Nombre:
+  <label id="nombre"/></label>
+   <br>
+ Apellido 1: 
+  <label id="apellido1"/></label>
+    <br>
+  Apellido 2:
+  <label  id="apellido2"/></label>
+    <br>
+  Telefono:
+  <label  id="telefono"/></label>
+
+  <br/>
+ 
+</body>
+</html>
+
+

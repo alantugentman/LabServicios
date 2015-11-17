@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+
+			function especialidad(valor)
+			{
+				if (valor == "Otra")
+				{
+					var otroInput = document.createElement('input');
+					otroInput.type = "text";
+					otroInput.id = "otraEsp";
+					otroInput.name = "fotraEsp";
+					otroInput.required = true;
+		
+					otroInput.placeholder = "Ingrese Especialidad";
+					document.getElementById("divOtraEsp").appendChild(otroInput);
+				}
+				else if (document.getElementById("otraEsp"))
+				{
+				    document.getElementById("otraEsp").remove();
+				}
+			}
+		</script>
+
+		<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+		<script>
+			function readURL(input) {
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+
+		            reader.onload = function (e) {
+		                $('#imagenID')
+		                    .attr('src', e.target.result)
+		                    .width(128)
+		                    .height(128);
+		            };
+
+		            reader.readAsDataURL(input.files[0]);
+		        }
+   			}
+    	</script>
+
+		<meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
+		<title>Registro</title>
+		<link rel='stylesheet' type='text/css' href='estilos/style.css' />		
+	</head>
+
+	<body>
+		<div id='page-wrap'>
+		<header class='main' id='h1'>	
+			<h2>Registro</h2>
+	    </header>
+	
+	    <section class="main" id="s1">
+			<form id="registro" name="registro" action = "registrar.php" method = "POST" enctype="multipart/form-data"> 
+		
+				<label>Nombre*: </label><input type = "text" id = "nombre" name = "fnombre" >
+				<br><br>
+				<label>Apellido 1*: </label><input type = "text" id = "apellido1" name = "fapellido1" >
+				<br><br>
+				<label>Apellido 2*: </label><input type = "text" id = "apellido2" name = "fapellido2" >
+				<br><br>
+				<label>Email*: </label><input type = "text" id = "email" name = "femail" >
+				<br><br>
+				<label>Telefono*: </label><input type = "tel" id = "telefono" name = "ftelefono" >
+				<br><br>
+				<label>Password*: </label><input type = "password" id = "password" name = "fpassword">
+				<br><br>
+				<label>Confirmacion*: </label><input type = "password" id = "confirmacion" name = "fconfirmacion">
+				<br><br>
+				<div id = "divOtraEsp">
+				<label>Especialidad*: </label>
+				<select name = "fespecialidad" onchange= "especialidad(this.value)" >
+						<option selected value = "Arquitectura">Arquitectura</option>
+						<option value = "Gestion">Gestion</option>
+						<option value = "Robotica">Robotica</option>
+						<option value = "Videojuegos">Videojuegos</option>
+						<option>Otra</option>	
+			 	</select>
+			 	</div>
+	
+			 	<br><br>
+				<label>Comentarios: </label>
+				<br>
+				<textarea rows = "5" cols = "50" name = "fcomentarios"></textarea>
+				<br><br>
+				
+				<label>Imagen: </label><br>
+				<input type="file" name="fimagen" onchange="readURL(this);" accept="image/*"/>
+	    		<img id="imagenID" src="uploads/default.jpg" alt="Imagen Perfil" height="128" width="128"/><br><br>
+
+				<input type="submit" name="fregistrar" id="registrar" value="Registrarse"><br><br>
+				
+			</form>
+			<span><a href='layout.html'>Volver</a></span>
+		</section>
+	</body>
+</html>

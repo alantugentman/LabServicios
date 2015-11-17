@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	 <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
+  	 <title>Insertar Preguntas</title>
+ </head>
+  <body>	
+	<form action="insertarPregunta.php"  method="post">           
+		<h2>Insertar Preguntas </h2>                
+		<p> Pregunta: <input type="text"  required name="fpreg" size="50" value="" placeholder="Ingrese pregunta"/>                
+		<p> Respuesta: <input type="text" required name="fresp" size="50" value="" placeholder="Ingrese respuesta"/>                
+		<p> Complejidad: <select name = "fcomp">
+								<option selected value = "0">Sin Complejidad</option>
+								<option value = "1">1</option>
+								<option value = "2">2</option>
+								<option value = "3">3</option>
+								<option value = "4">4</option>
+								<option value = "5">5</option>
+					 	 </select>
+		<p> Tema: <input type="text" required name="ftema" size="50" value="" placeholder="Ingrese tema"/>        			 	
+		<p> <input id="insertar" type="submit" value = "Crear" />
+	</form>
+	<br><br>
+	<span><a href='layout.html'>Menu Principal</a></span>
+
+  </body>
+</html>
